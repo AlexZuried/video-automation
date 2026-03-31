@@ -26,7 +26,15 @@ loguru>=0.7.0
 asyncio>=3.4.3
 aiofiles>=23.2.0
 
+# Resilience & Performance
+backoff>=2.2.1  # Exponential backoff for retries
+
 # Testing
 pytest>=7.4.0
 pytest-asyncio>=0.21.0
 pytest-cov>=4.1.0
+
+# Development (optional)
+# black>=23.0.0
+# flake8>=6.0.0
+# mypy>=1.0.0
