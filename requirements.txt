@@ -1,40 +1,10 @@
-# Core Dependencies
-requests>=2.31.0
-aiohttp>=3.9.0
-beautifulsoup4>=4.12.0
-lxml>=4.9.0
-
-# Video Processing
-moviepy>=1.0.3
-opencv-python>=4.8.0
+httpx>=0.24.0
+aioredis>=2.0.0
+imagehash>=4.3.0
+Pillow>=9.0.0
 ffmpeg-python>=0.2.0
-
-# AI/ML
-openai>=1.10.0
-transformers>=4.35.0
-torch>=2.0.0
-
-# Social Media APIs
-tweepy>=4.14.0
-google-api-python-client>=2.100.0
-instagrapi>=2.0.0
-
-# Utilities
+numpy>=1.24.0
+playwright>=1.40.0
 python-dotenv>=1.0.0
-pydantic>=2.5.0
-loguru>=0.7.0
-asyncio>=3.4.3
-aiofiles>=23.2.0
-
-# Resilience & Performance
-backoff>=2.2.1  # Exponential backoff for retries
-
-# Testing
-pytest>=7.4.0
-pytest-asyncio>=0.21.0
-pytest-cov>=4.1.0
-
-# Development (optional)
-# black>=23.0.0
-# flake8>=6.0.0
-# mypy>=1.0.0
+PyYAML>=6.0
+backoff>=2.2.0
