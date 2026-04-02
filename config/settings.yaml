@@ -1,0 +1,24 @@
+scraping:
+  max_concurrent_requests: 5
+  retry_attempts: 3
+  timeout_seconds: 30
+  min_likes: 100000
+  min_views: 1000000
+
+processing:
+  enable_deduplication: true
+  similarity_threshold: 0.85
+  enable_trend_prediction: true
+  
+upload:
+  batch_size: 10
+  delay_between_uploads_seconds: 300
+  platforms:
+    - instagram
+    - tiktok
+    - twitter
+    - youtube_shorts
+
+logging:
+  level: INFO
+  file: logs/pipeline.log
