@@ -1,25 +1,15 @@
 import httpx
 import re
 import asyncio
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Dict
 from loguru import logger
 
 class AiScorerHttp:
     """
-    Lightweight AI Scorer using free HTTP endpoints.
+    Lightweight AI Scorer using free HTTP endpoints or Heuristic Fallback.
     No API Key required. No Browser automation.
-    Fetches video metadata and asks AI to rate 1-10.
     """
     
-    # Free endpoints (Fallback chain)
-    ENDPOINTS = [
-        "https://huggingface.co/api/models/meta-llama/Llama-3.2-1B-Instruct", 
-        # Note: In a real production env without key, we might use a mock or a specific free tier.
-        # For this implementation, we simulate the logic or use a public demo endpoint if available.
-        # Since truly free unauthenticated LLM APIs are rare/unstable, this class includes
-        # a robust Heuristic Fallback if the API fails, ensuring the pipeline never stops.
-    ]
-
     def __init__(self, threshold: float = 6.0):
         self.threshold = threshold
         self.client = httpx.AsyncClient(timeout=15.0)
@@ -32,14 +22,16 @@ class AiScorerHttp:
         Returns (is_accepted, score)
         """
         prompt = self._build_prompt(video_url, metadata)
+        score = None
         
         try:
-            # Attempt to call a free inference API (Mocked for stability in this snippet)
-            # In a real scenario, you would point this to a specific free HuggingFace Space API
+            # Attempt to call a free inference API (Placeholder for real endpoint)
+            # Since truly free unauthenticated LLM APIs are unstable, we simulate
+            # the request structure and fall back to heuristics if it fails.
             score = await self._call_ai_api(prompt)
             
             if score is None:
-                logger.warning("AI API failed or returned no score. Using heuristic fallback.")
+                logger.warning("AI API unavailable. Using heuristic fallback.")
                 score = self._heuristic_fallback(metadata)
                 
         except Exception as e:
@@ -57,7 +49,7 @@ class AiScorerHttp:
         return f"""
         Analyze this video potential based on metadata:
         URL: {url}
-        Title/Caption: {meta.get('description', 'N/A')}
+        Caption: {meta.get('description', 'N/A')}
         Hashtags: {', '.join(meta.get('hashtags', []))}
         Stats: {meta.get('likes', 0)} likes, {meta.get('views', 0)} views.
         
@@ -67,10 +59,10 @@ class AiScorerHttp:
     async def _call_ai_api(self, prompt: str) -> Optional[float]:
         """
         Placeholder for actual API call. 
-        Since free unauthenticated APIs are unstable, this simulates the request structure.
+        Returns None to trigger fallback in this demo environment.
         """
-        # Example structure for HuggingFace Inference API (requires token usually)
-        # Without a token, we return None to trigger the robust heuristic fallback.
+        # Example: response = await self.client.post("https://api.free-llm.com...", json={"prompt": prompt})
+        # Parse response for number using regex r'\b([1-9]|10)\b'
         return None 
 
     def _heuristic_fallback(self, meta: dict) -> float:
@@ -94,13 +86,3 @@ class AiScorerHttp:
         if views > 1000000: score += 1.0
         
         return min(score, 10.0)
-
-# Usage Example
-if __name__ == "__main__":
-    async def test():
-        scorer = AiScorerHttp()
-        meta = {"likes": 150000, "views": 2000000, "hashtags": ["viral"], "description": "Amazing"}
-        await scorer.score_video("http://test.com", meta)
-        await scorer.close()
-    
-    asyncio.run(test())
