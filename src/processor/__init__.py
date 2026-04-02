@@ -1,5 +1,5 @@
-"""Processor package initialization."""
-from .ai_reviewer import VideoReviewer
-from .pipeline import VideoProcessor
+from .ai_scorer_http import AiScorerHttp
+from .semantic_deduplicator import SemanticDeduplicator
+from .trend_prediction import TrendPredictor
 
-__all__ = ["VideoReviewer", "VideoProcessor"]
+__all__ = ["AiScorerHttp", "SemanticDeduplicator", "TrendPredictor"]
