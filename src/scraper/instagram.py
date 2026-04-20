@@ -1,10 +1,23 @@
+"""Instagram scraper module."""
 from .base import BaseScraper
 from typing import List, Dict
 from loguru import logger
 import re
 import json
+from ..utils.models import Platform
+
 
 class InstagramScraper(BaseScraper):
+    """Scraper for Instagram platform."""
+    
+    def __init__(self, timeout: int = 30):
+        super().__init__()
+        self.timeout = timeout
+    
+    @property
+    def platform(self) -> Platform:
+        return Platform.INSTAGRAM
+    
     async def scrape_hashtag(self, hashtag: str, limit: int = 10) -> List[Dict]:
         logger.info(f"Scraping Instagram for #{hashtag}")
         results = []

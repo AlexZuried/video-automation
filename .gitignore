@@ -1,27 +1,6 @@
+```
 __pycache__/
-*.py[cod]
-*$py.class
-.env
-venv/
-.DS_Store
-*.mp4
-*.mov
-logs/
-*.log
-
-# Environment
-.env
-.env.local
-.env.*
-
-# IDE
-.vscode/
-.idea/
-
-# Logs
-*.log
-
-# OS
-.DS_Store
-Thumbs.db
+*.pyc
+*.pyo
+*.pyd
 ```
