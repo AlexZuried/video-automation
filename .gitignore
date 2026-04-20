@@ -1,27 +1,40 @@
+```
+# Dependencies
 __pycache__/
-*.py[cod]
-*$py.class
-.env
+*.pyc
+*.pyo
+*.pyd
+.Python
 venv/
-.DS_Store
-*.mp4
-*.mov
-logs/
-*.log
-
-# Environment
+.venv/
 .env
 .env.local
 .env.*
 
-# IDE
-.vscode/
-.idea/
+# Testing
+.coverage
+htmlcov/
+.coverage.*
+.cache
+.pytest_cache/
+.mypy_cache/
 
 # Logs
 *.log
 
-# OS
+# OS generated files
 .DS_Store
 Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
 ```

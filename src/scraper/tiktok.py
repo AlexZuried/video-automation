@@ -1,9 +1,22 @@
+"""TikTok scraper module."""
 from .base import BaseScraper
 from typing import List, Dict
 from loguru import logger
 import re
+from ..utils.models import Platform
+
 
 class TikTokScraper(BaseScraper):
+    """Scraper for TikTok platform."""
+    
+    def __init__(self, timeout: int = 30):
+        super().__init__()
+        self.timeout = timeout
+    
+    @property
+    def platform(self) -> Platform:
+        return Platform.TIKTOK
+    
     async def scrape_hashtag(self, hashtag: str, limit: int = 10) -> List[Dict]:
         logger.info(f"Scraping TikTok for #{hashtag}")
         results = []
